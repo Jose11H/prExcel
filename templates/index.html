@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparar Excel</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Depuración Excel</h1>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} mt-4" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <form method="POST" enctype="multipart/form-data" class="mt-4">
+            <div class="form-group">
+                <label for="file1">Archivo Excel 1:</label>
+                <input type="file" class="form-control-file" name="file1" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="file2">Archivo Excel 2:</label>
+                <input type="file" class="form-control-file" name="file2" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="column_name1">Nombre de la Columna 1:</label>
+                <input type="text" class="form-control" name="column_name1" required>
+            </div>
+
+            <div class="form-group" id="column_name2_group">
+                <label for="column_name2">Nombre de la Columna 2 (opcional):</label>
+                <input type="text" class="form-control" name="column_name2">
+            </div>
+
+            <div class="form-group">
+                <label for="start_row">Fila de Inicio (opcional):</label>
+                <input type="number" class="form-control" name="start_row" value="1">
+            </div>
+
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="compare_two_columns" name="compare_two_columns" checked>
+                <label class="form-check-label" for="compare_two_columns">Comparar dos columnas</label>
+            </div>
+
+            <div class="form-group">
+                <label for="highlight_columns">Columnas a Resaltar (separadas por comas):</label>
+                <input type="text" class="form-control" name="highlight_columns" placeholder="Ej: A, B, C" value="B,C,D,E">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Depurar y Descargar</button>
+        </form>
+        <br>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const checkbox = document.getElementById('compare_two_columns');
+            const column2Group = document.getElementById('column_name2_group');
+            const column2Input = column2Group.querySelector('input');
+
+            // Función para manejar la visibilidad del campo de la segunda columna
+            function handleColumn2Visibility() {
+                if (checkbox.checked) {
+                    column2Group.style.display = 'block';
+                } else {
+                    column2Group.style.display = 'none';
+                    column2Input.value = ''; // Limpia el valor del campo cuando está oculto
+                }
+            }
+
+            // Inicializar visibilidad al cargar la página
+            handleColumn2Visibility();
+
+            // Manejar cambios en el estado del checkbox
+            checkbox.addEventListener('change', handleColumn2Visibility);
+        });
+        console.log("Columna DPS")
+        console.log("FORMATO DE LOGISTICA INVERSA - DELL - UNISYS")
+        console.log("Columna P/N")
+        console.log("Unnamed: 3")
+
+    </script>
+</body>
+</html>
